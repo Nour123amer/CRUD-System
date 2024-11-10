@@ -1,0 +1,39 @@
+.system{
+    background-color: rgb(55, 196, 239); 
+}
+
+.container{
+   
+    width: 75%;
+    margin: 2rem auto;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.container input{
+    color: black;
+}
+
+h2{
+    text-align: center;
+    padding: 1rem;
+}
+
+table .table{
+    width: 75%;
+    margin: 2rem auto;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+/* #btnUpdate{
+    display: none;
+} */
+
+/* #btnUpdate.change{
+    display: block;
+}
+
+#btnAdd.change{
+    display: none;
+} */
