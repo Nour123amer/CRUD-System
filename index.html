@@ -15,19 +15,21 @@
         <h2>CRUD SYSTEM</h2>
 
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="productName" placeholder="name@example.com">
+            <input type="text" oninput="validateName()" class="form-control" id="productName" placeholder="name@example.com">
+            <p class="text-danger d-none errorMsgName">Product name must start with a capital letter and a 3 small characts at least.</p>
             <label for="productName">Product Name</label>
         </div>
 
 
 
         <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="productPrice" placeholder="name@example.com">
+            <input type="number" oninput="validatePrice() " class="form-control" id="productPrice" placeholder="name@example.com">
             <label for="productPrice">Product Price</label>
+            <p class="text-danger errorMsgPrice d-none">Price must be between 5 & 100 $</p>
         </div>
 
         <div class="form-floating mb-3">
-            <input list="category" type="text" class="form-control" id="productCategory" placeholder="name@example.com">
+            <input  list="category"  type="text" oninput="validateCategory()" class="form-control " id="productCategory" placeholder="name@example.com">
             <label for="productPrice">Product Category</label>
             <datalist id="category">
                 <oPtion value="Tv" />
@@ -36,16 +38,19 @@
                 <oPtion value="Mobile" />
                 <oPtion value="Smart watch" />
             </datalist>
+            <p class="text-danger errorMsgCategory d-none">Category must be from the list </p>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="productDescription" placeholder="name@example.com">
+            <input type="text" oninput="validateDescription()" class="form-control" id="productDescription" placeholder="name@example.com">
             <label for="productPrice">Product Description</label>
+            <p class="text-danger errorMsgDescription d-none">Description must start with a capital letter followed by 3 letters at least.</p>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="file" class="form-control" id="productImage" placeholder="name@example.com">
+            <input type="file" class="form-control is-invalid " onchange="validateImage()" id="productImage" placeholder="name@example.com">
             <label for="productImage">Product Image</label>
+            <p class="text-danger errorMsgImage d-none"> Image must be png or jpeg or avif or svg</p>
         </div>
 
         <button id="btnAdd" type="submit" class="btn btn-primary mb-3">Add Product</button>
