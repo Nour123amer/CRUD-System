@@ -15,20 +15,20 @@
         <h2>CRUD SYSTEM</h2>
 
         <div class="form-floating mb-3">
-            <input type="text" oninput="validateInputs(this ,'errorMsgName')" class="form-control productName" id="productNameRegex" placeholder="name@example.com">
+            <input type="text" oninput="validateName()" class="form-control productName is-invalid" id="productNameRegex" placeholder="name@example.com">
            <label for="productName">Product Name</label>
-            <p class="text-danger d-none " id="errorMsgName">Product name must start with a capital letter and a 3 small characts at least.</p>
+            <p class="text-danger d-none errorMsgName" >Product name must start with a capital letter and a 3 small characts at least.</p>
            
         </div>
 
         <div class="form-floating mb-3">
-            <input type="number" oninput="validateInputs(this ,'errorMsgPrice')" class="form-control productPrice" id="productPriceRegex" placeholder="name@example.com">
+            <input type="number" oninput="validatePrice()" class="form-control productPrice" id="productPriceRegex" placeholder="name@example.com">
             <label for="productPrice">Product Price</label>
-            <p class="text-danger  d-none" id="errorMsgPrice">Price must be between 5 & 100 $</p>
+            <p class="text-danger  d-none errorMsgPrice" ">Price must be between 5 & 100 $</p>
         </div>
 
         <div class="form-floating mb-3">
-            <input  list="category"  type="text" oninput="validateInputs(this ,'errorMsgCategory')" class="form-control productCategory" id="productCategoryRegex" placeholder="name@example.com">
+            <input  list="category"  type="text" oninput="validateCategory()" class="form-control productCategory" id="productCategoryRegex" placeholder="name@example.com">
             <label for="productPrice">Product Category</label>
             <datalist id="category">
                 <oPtion value="Tv" />
@@ -37,23 +37,23 @@
                 <oPtion value="Mobile" />
                 <oPtion value="Smart watch" />
             </datalist>
-            <p class="text-danger  d-none" id="errorMsgCategory">Category must be from the list </p>
+            <p class="text-danger  d-none errorMsgCategory" >Category must be from the list </p>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" oninput="validateInputs(this ,'errorMsgDescription')" class="form-control productDescription" id="productDescriptionRegex" placeholder="name@example.com">
+            <input type="text" oninput="validateDescription()" class="form-control productDescription" id="productDescriptionRegex" placeholder="name@example.com">
             <label for="productPrice">Product Description</label>
-            <p class="text-danger  d-none" id="errorMsgDescription">Description must start with a capital letter followed by 3 letters at least.</p>
+            <p class="text-danger  d-none errorMsgDescription"  >Description must start with a capital letter followed by 3 letters at least.</p>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="file"  class="form-control  productImage"  id="productImageRegex" placeholder="name@example.com">
+            <input type="file" onchange="validateImage()"  class="form-control  productImage"  id="productImageRegex" placeholder="name@example.com">
             <label for="productImage">Product Image</label>
-            <p class="text-danger  d-none" id="errorMsgImage"> Image must be png or jpeg or avif or svg</p>
+            <p class="text-danger  d-none errorMsgImage" > Image must be png or jpeg or avif or svg</p>
         </div>
 
         <button id="btnAdd" type="submit" class="btn btn-primary mb-3">Add Product</button>
-        <button id="btnUpdate" onclick="updateProduct()" type="submit" class="btn btn-warning mb-3 d-none">Update Product</button>
+        <button id="btnUpdate"  type="submit" class="btn btn-warning mb-3 d-none">Update Product</button>
 
     </div>
 

@@ -134,24 +134,23 @@ console.log(JSON.parse(localStorage.getItem("productList")));
 
 if (localStorage.getItem("productList") !== null) {
     productList = JSON.parse(localStorage.getItem("productList"));
-    addProduct();
+    displayProducts();
 }
 
 function addProduct() {
  if(
-    validateInputs(productName ," productNameRegex") &&
-    validateInputs(productPrice ," productPriceRegex") &&
-    validateInputs(productCategory ,"productCategoryRegex") &&
-    validateInputs(productDescription ,"productDescriptionRegex") 
-    // validateInputs(productImage ,"productImageRegex") 
-//     validateName()  &&
-//   validatePrice()  &&
-//   validateCategory()  &&
-//   validateDescription()  &&
+    // validateInputs(productName ,"errorMsgName") &&
+    // validateInputs(productPrice ," errorMsgPrice") &&
+    // validateInputs(productCategory ,"errorMsgCategory") &&
+    // validateInputs(productDescription ,"errorMsgDescription") 
+    // // validateInputs(productImage ,"errorMsgImage") 
+    validateName()  &&
+  validatePrice()  &&
+  validateCategory()  &&
+  validateDescription()  
 //   validateImage()
 
-)
-  {
+) {
     var productValues = {
         name: productName.value,
         price: productPrice.value,
@@ -164,6 +163,7 @@ function addProduct() {
     localStorage.setItem("productList", JSON.stringify(productList));
     displayProducts();
     console.log(productList);
+ 
  }
 
 }
@@ -187,7 +187,7 @@ function displayProducts() {
                 </tr>
     `
     }
-    content.innerHTML = productData;
+    content.innerHTML += productData;
 }
 
 function clearForm() {
@@ -279,133 +279,170 @@ addBtn.addEventListener('click', () => {
     clearForm();
 });
 
+updateBtn.addEventListener('click',()=>{
+    updateProduct();
+    updateBtn.classList.add('d-none');
+    addBtn.classList.remove('d-none');
+})
+
 
 // validation
 
 //element => input
 
-function validateInputs(element ,msgId) {
-    var text = element.value;
-    console.log(text);
+// function validateInputs(element ,msgId) {
+//     var text = element.value;
+//     console.log(text);
     
-    var regex = {
-        productNameRegex:/^[A-z][a-z]{3,8}$/,
-        productPriceRegex:/^(5|[6-9]|\d{2}|100)$/,
-        productCategoryRegex:/^(Tv|mobile|screens|camera)$/i,
-        productDescriptionRegex: /^[A-z][a-z]{3,20}$/,
-        productImageRegex:/^.{1,}\.(jpg|png|avif|jpeg|svg)$/,
-    }
-    var msg = document.getElementById(msgId);
+//     var regex = {
+//         productNameRegex:/^[A-z][a-z]{3,8}$/,
+//         productPriceRegex:/^(5|[6-9]|\d{2}|100)$/,
+//         productCategoryRegex:/^(Tv|mobile|screens|camera)$/i,
+//         productDescriptionRegex: /^[A-z][a-z]{3,20}$/,
+//         productImageRegex:/^.{1,}\.(jpg|png|avif|jpeg|svg)$/,
+//     }
+//     var msg = document.getElementById(msgId);
 
-    window.onload = function() {
-        msg.classList.add('d-none');
-        element.classList.remove('is-invalid');
+//     window.onload = function() {
+//         msg.classList.add('d-none');
+//         element.classList.remove('is-invalid');
+//     };
+
+//     if (regex[element.id].test(text) == true) {
+
+//         msg.classList.add('d-none');
+//         element.classList.remove('is-invalid');
+//         element.classList.add('is-valid');
+//         return true;
+
+//     } else {
+//         element.classList.remove('is-valid');
+//         element.classList.add('is-invalid');
+//         msg.classList.remove('d-none');
+//         return false;
+//     }
+   
+// }
+  window.onload = function() {
+        errorMsgName.classList.add('d-none');
+        productName.classList.remove('is-invalid');
     };
 
-    if (regex[element.id].test(text) == true) {
+function validateName() {
 
-        msg.classList.add('d-none');
-        element.classList.remove('is-invalid');
-        element.classList.add('is-valid');
+  
+    var name = productName.value;
+    var nameRegex = /^[A-z][a-z]{3,8}$/;
+    if (nameRegex.test(name) == true) {
+
+        errorMsgName.classList.add('d-none');
+        productName.classList.remove('is-invalid');
+        productName.classList.add('is-valid');
+        return true;
+    } else {
+        productName.classList.remove('is-valid');
+        productName.classList.add('is-invalid');
+        errorMsgName.classList.remove('d-none');
+        return false;
+    }
+}
+//    
+
+
+// }
+
+
+function validatePrice() {
+
+    window.onload = function() {
+        errorMsgPrice.classList.add('d-none');
+        productPrice.classList.remove('is-invalid');
+    };
+    var price = productPrice.value;
+    var priceRegex = /^(5|[6-9]|\d{2}|100)$/;
+    if (priceRegex.test(price) == true) {
+
+        errorMsgPrice.classList.add('d-none');
+        productPrice.classList.remove('is-invalid');
+        productPrice.classList.add('is-valid');
 
     } else {
-        element.classList.remove('is-valid');
-        element.classList.add('is-invalid');
-        msg.classList.remove('d-none');
+        productPrice.classList.remove('is-valid');
+        productPrice.classList.add('is-invalid');
+        errorMsgPrice.classList.remove('d-none');
     }
-   
+
+    return true;
+
+
 }
 
-// function validatePrice() {
+function validateCategory() {
+    let errorMsgCategory= document.querySelector('.errorMsgCategory');
+    var category = productCategory.value;
+    var categoryRegex = /^(Tv|mobile|screens|camera)$/i;
+    window.onload = function() {
+        errorMsgCategory.classList.add('d-none');
+        productCategory.classList.remove('is-invalid');
+    };
 
-//     window.onload = function() {
-//         errorMsgPrice.classList.add('d-none');
-//         productPrice.classList.remove('is-invalid');
-//     };
-//     var price = productPrice.value;
-//     var priceRegex = /^(5|[6-9]|\d{2}|100)$/;
-//     if (priceRegex.test(price) == true) {
+    if (categoryRegex.test(category) == true) {
 
-//         errorMsgPrice.classList.add('d-none');
-//         productPrice.classList.remove('is-invalid');
-//         productPrice.classList.add('is-valid');
+        errorMsgCategory.classList.add('d-none');
+        productCategory.classList.remove('is-invalid');
+        productCategory.classList.add('is-valid');
 
-//     } else {
-//         productPrice.classList.remove('is-valid');
-//         productPrice.classList.add('is-invalid');
-//         errorMsgPrice.classList.remove('d-none');
-//     }
+    } else {
+        productCategory.classList.remove('is-valid');
+        productCategory.classList.add('is-invalid');
+        errorMsgCategory.classList.remove('d-none');
+    }
+   return true;
+}
 
-//     return true;
+function validateDescription() {
+    let errorMsgDescription= document.querySelector('.errorMsgDescription');
+    var description = productDescription.value;
+    var descriptionRegex = /^[A-z][a-z]{3,20}$/;
+    window.onload = function() {
+        errorMsgDescription.classList.add('d-none');
+        productDescription.classList.remove('is-invalid');
+    };
 
+    if (descriptionRegex.test(description) == true) {
 
-// }
+        errorMsgDescription.classList.add('d-none');
+        productDescription.classList.remove('is-invalid');
+        productDescription.classList.add('is-valid');
 
-// function validateCategory() {
-//     let errorMsgCategory= document.querySelector('.errorMsgCategory');
-//     var category = productCategory.value;
-//     var categoryRegex = /^(Tv|mobile|screens|camera)$/i;
-//     window.onload = function() {
-//         errorMsgCategory.classList.add('d-none');
-//         productCategory.classList.remove('is-invalid');
-//     };
+    } else {
+        productDescription.classList.remove('is-valid');
+        productDescription.classList.add('is-invalid');
+        errorMsgDescription.classList.remove('d-none');
+    }
+   return true;
+}
 
-//     if (categoryRegex.test(category) == true) {
+function validateImage() {
+    let errorMsgImage= document.querySelector('.errorMsgImage');
+    var image = productImage.value;
+    var imageRegex = /^.{1,}\.(jpg|png|avif|jpeg|svg)$/i;
+    window.onload = function() {
+        errorMsgImage.classList.add('d-none');
+        productImage.classList.remove('is-invalid');
+    };
 
-//         errorMsgCategory.classList.add('d-none');
-//         productCategory.classList.remove('is-invalid');
-//         productCategory.classList.add('is-valid');
+    if (imageRegex.test(image) == true) {
 
-//     } else {
-//         productCategory.classList.remove('is-valid');
-//         productCategory.classList.add('is-invalid');
-//         errorMsgCategory.classList.remove('d-none');
-//     }
-//    return true;
-// }
-
-// function validateDescription() {
-//     let errorMsgDescription= document.querySelector('.errorMsgDescription');
-//     var description = productDescription.value;
-//     var descriptionRegex = /^[A-z][a-z]{3,20}$/;
-//     window.onload = function() {
-//         errorMsgDescription.classList.add('d-none');
-//         productDescription.classList.remove('is-invalid');
-//     };
-
-//     if (descriptionRegex.test(description) == true) {
-
-//         // errorMsgDescription.classList.add('d-none');
-//         productDescription.classList.remove('is-invalid');
-//         productDescription.classList.add('is-valid');
-
-//     } else {
-//         productDescription.classList.remove('is-valid');
-//         productDescription.classList.add('is-invalid');
-//         errorMsgDescription.classList.remove('d-none');
-//     }
-//    return true;
-// }
-
-// function validateImage() {
-//     let errorMsgImage= document.querySelector('.errorMsgImage');
-//     var image = productImage.value;
-//     var imageRegex = /^.{1,}\.(jpg|png|avif|jpeg|svg)$/;
-//     window.onload = function() {
-//         errorMsgImage.classList.add('d-none');
-//         productImage.classList.remove('is-invalid');
-//     };
-
-//     if (imageRegex.test(image) == true) {
-
-//         errorMsgImage.classList.add('d-none');
-//         productImage.classList.remove('is-invalid');
-//         productImage.classList.add('is-valid');
-
-//     } else {
-//         productImage.classList.remove('is-valid');
-//         productImage.classList.add('is-invalid');
-//         errorMsgImage.classList.remove('d-none');
-//     }
-//    return true;
-// }
+        errorMsgImage.classList.add('d-none');
+        productImage.classList.remove('is-invalid');
+        productImage.classList.add('is-valid');
+        return true;
+    } else {
+        productImage.classList.remove('is-valid');
+        productImage.classList.add('is-invalid');
+        errorMsgImage.classList.remove('d-none');
+        return false;
+    }
+ 
+}
